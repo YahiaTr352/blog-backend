@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-dotenv.config({ path: "../.env" });
+dotenv.config();
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import usersRoutes from "./routes/users";
@@ -19,12 +19,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+const allowedOrigins = [
+    "http://localhost:5173",
+    "http://localhost:4173",
+    process.env.FRONTEND_SERVER_PROD,
+].filter(Boolean) as string[];
+
 const corsOptions = {
-    origin: [
-        "http://localhost:5173",
-        "http://localhost:4173",
-        process.env.FRONTEND_SERVER_PROD || "",
-    ],
+    origin: allowedOrigins,
     credentials: true,
 };
 app.use(cors(corsOptions));

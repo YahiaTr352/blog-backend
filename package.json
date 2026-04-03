@@ -2,7 +2,8 @@
     "scripts": {
         "server": "npx nodemon",
         "start": "NODE_ENV=prod node dist/index.js",
-        "seed": "npx tsc && node dist/seed.js"
+        "seed": "npx tsc && node dist/seed.js",
+        "build": "npx prisma generate && npx tsc"
     },
     "dependencies": {
         "@ngneat/falso": "^7.0.1",
